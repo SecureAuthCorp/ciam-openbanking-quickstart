@@ -126,7 +126,6 @@ pipeline {
                 }
             }
         }
-        */
         stage('FDX Tests with disabled MFA') {
             steps {
                 script {
@@ -198,7 +197,6 @@ pipeline {
                 }
             }
         }
-        /*
         stage('Generic Tests with enabled MFA') {
             steps {
                 script {
@@ -213,7 +211,6 @@ pipeline {
                 }
             }
         }
-        */
         stage('SaaS FDX Tests') {
             steps {
                 script {
