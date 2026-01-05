@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -22,7 +21,8 @@ func TestConfig(t *testing.T) {
 		"BANK_URL":          "http://bank-br:8070",
 		"BANKS_CONFIG_FILE": "banks.json",
 	} {
-		os.Setenv(k, v)
+		err := os.Setenv(k, v)
+		require.NoError(t, err)
 	}
 
 	config, err := LoadConfig()
@@ -87,7 +87,7 @@ func TestLoadBanksConfig(t *testing.T) {
 			t.Parallel()
 
 			if tc.jsonContent != "" {
-				configFile, err := ioutil.TempFile("/tmp", "testbankconfig_*.json")
+				configFile, err := os.CreateTemp("/tmp", "testbankconfig_*.json")
 				require.NoError(t, err)
 				defer os.Remove(configFile.Name())
 

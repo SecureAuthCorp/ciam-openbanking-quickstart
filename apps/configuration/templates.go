@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 	"text/template"
@@ -26,7 +25,7 @@ func LoadTemplates(dirs []string, variablesFile *string) (Templates, error) {
 		templates = Templates{
 			m: map[string][]byte{},
 		}
-		files     []os.FileInfo
+		files     []os.DirEntry
 		bs        []byte
 		variables = YamlFile{}
 		t         *template.Template
@@ -46,7 +45,7 @@ func LoadTemplates(dirs []string, variablesFile *string) (Templates, error) {
 	}
 
 	for _, d := range dirs {
-		if files, err = ioutil.ReadDir(d); err != nil {
+		if files, err = os.ReadDir(d); err != nil {
 			return templates, errors.Wrapf(err, "failed to read templates dir: %s", d)
 		}
 

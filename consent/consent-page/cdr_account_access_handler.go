@@ -30,7 +30,7 @@ func (s *CDRAccountAccessConsentHandler) GetConsent(c *gin.Context, loginRequest
 		return
 	}
 
-	id = s.CDRConsentTools.GetInternalBankDataIdentifier(response.Payload.Subject, response.Payload.AuthenticationContext)
+	id = s.GetInternalBankDataIdentifier(response.Payload.Subject, response.Payload.AuthenticationContext)
 
 	if accounts, err = s.BankClient.GetInternalAccounts(c, id); err != nil {
 		s.RenderInternalServerError(c, errors.Wrapf(err, "failed to get accounts from bank"))

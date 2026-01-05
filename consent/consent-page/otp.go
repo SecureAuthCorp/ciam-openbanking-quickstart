@@ -56,7 +56,7 @@ func (u *OTPRepo) Get(id OTPID) (OTP, error) {
 		err error
 	)
 
-	if err = u.DB.View(func(tx *bolt.Tx) error {
+	if err = u.View(func(tx *bolt.Tx) error {
 		k, bs = tx.Bucket(bucket).Cursor().Seek([]byte(id))
 
 		if bs == nil || !bytes.Equal(k, []byte(id)) {
@@ -87,7 +87,7 @@ func (u *OTPRepo) Set(otp OTP) error {
 		return errors.Wrapf(err, "failed to marshal otp")
 	}
 
-	if err = u.DB.Update(func(tx *bolt.Tx) error {
+	if err = u.Update(func(tx *bolt.Tx) error {
 		return tx.Bucket(bucket).Put([]byte(otp.ID), bs)
 	}); err != nil {
 		return errors.Wrapf(err, "failed to update otp")

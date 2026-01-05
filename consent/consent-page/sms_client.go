@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -57,7 +57,7 @@ func (s *SMSClient) Send(to string, body string) error {
 	}
 	defer resp.Body.Close()
 
-	if bs, err = ioutil.ReadAll(resp.Body); err != nil {
+	if bs, err = io.ReadAll(resp.Body); err != nil {
 		return err
 	}
 

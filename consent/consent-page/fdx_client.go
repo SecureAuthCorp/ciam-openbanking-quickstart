@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -53,12 +53,12 @@ func (c *FDXClient) GetInternalAccounts(ctx context.Context, _ string) (Internal
 		return InternalAccounts{}, err
 	}
 
-	if response, err = c.Client.Do(request); err != nil {
+	if response, err = c.Do(request); err != nil {
 		return InternalAccounts{}, err
 	}
 	defer response.Body.Close()
 
-	if bytes, err = ioutil.ReadAll(response.Body); err != nil {
+	if bytes, err = io.ReadAll(response.Body); err != nil {
 		return InternalAccounts{}, err
 	}
 

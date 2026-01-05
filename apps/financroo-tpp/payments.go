@@ -79,7 +79,7 @@ func (o *OBBRClient) CreatePayment(c *gin.Context, data interface{}, accessToken
 		return PaymentCreated{}, nil
 	}
 
-	if paymentCreatedResponse, err = o.Payments.Pagamentos.PaymentsPostPixPayments(
+	if paymentCreatedResponse, err = o.Pagamentos.PaymentsPostPixPayments(
 		pagamentos.NewPaymentsPostPixPaymentsParamsWithContext(c).
 			WithAuthorization(accessToken).
 			WithBody(&models.OpenbankingBrasilPaymentCreatePixPayment{

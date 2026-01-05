@@ -28,7 +28,7 @@ func (s *OBBRPaymentConsentHandler) GetConsent(c *gin.Context, loginRequest Logi
 		return
 	}
 
-	id = s.OBBRConsentTools.GetInternalBankDataIdentifier(wrapper.GetSubject(), wrapper.GetAuthenticationContext())
+	id = s.GetInternalBankDataIdentifier(wrapper.GetSubject(), wrapper.GetAuthenticationContext())
 
 	if accounts, err = s.BankClient.GetInternalAccounts(c, id); err != nil {
 		s.RenderInternalServerError(c, errors.Wrapf(err, "failed to get accounts from bank"))

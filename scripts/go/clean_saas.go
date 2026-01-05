@@ -30,7 +30,6 @@ func main() {
 
 	var (
 		request      *http.Request
-		response     *http.Response
 		err          error
 		tURL         *url.URL
 		tenantURLRaw string
@@ -68,11 +67,9 @@ func main() {
 			log.Fatalf("ERROR: Failed to setup delete server '%s' request: %v", sid, err)
 		}
 
-		if response, err = doRequest(client, request, http.StatusNoContent); err != nil {
+		if err = doRequest(client, request, http.StatusNoContent); err != nil {
 			log.Fatalf("ERROR: Failed to delete server '%s': %v", sid, err)
 		}
-
-		response.Body.Close()
 	}
 
 	for _, cid := range openbankingClientsIDs {
@@ -84,25 +81,25 @@ func main() {
 			log.Fatalf("ERROR: Failed to setup delete client '%s' request: %v", cid, err)
 		}
 
-		if response, err = doRequest(client, request, http.StatusNoContent); err != nil {
+		if err = doRequest(client, request, http.StatusNoContent); err != nil {
 			log.Fatalf("ERROR: Failed to delete client '%s': %v", cid, err)
 		}
-
-		response.Body.Close()
 	}
 }
 
-func doRequest(client *http.Client, request *http.Request, statusCode int) (response *http.Response, err error) {
-	if response, err = client.Do(request); err != nil {
-		return response, err
+func doRequest(client *http.Client, request *http.Request, statusCode int) error {
+	response, err := client.Do(request)
+	if err != nil {
+		return err
 	}
+	defer response.Body.Close()
 
-	if http.StatusNotFound == response.StatusCode {
+	if response.StatusCode == http.StatusNotFound {
 		fmt.Printf("INFO: The response finished with status code '%d'\n", response.StatusCode)
-		return response, nil
+		return nil
 	} else if response.StatusCode != statusCode {
 		fmt.Printf("INFO: The response finished with status code '%d'\n", response.StatusCode)
 	}
 	fmt.Printf("INFO: The response finished with status code '%d'\n", response.StatusCode)
-	return response, nil
+	return nil
 }
