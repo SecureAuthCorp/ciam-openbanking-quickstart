@@ -24,7 +24,7 @@ require (
 	github.com/jinzhu/copier v0.3.5
 	github.com/nicksnyder/go-i18n/v2 v2.2.1
 	github.com/pkg/errors v0.9.1
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.1
 	github.com/stretchr/testify v1.10.0
 	go.etcd.io/bbolt v1.3.6
 	golang.org/x/oauth2 v0.27.0
