@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	"github.com/cloudentity/openbanking-quickstart/generated/obuk/accounts/models"
@@ -42,7 +42,7 @@ func (c *OBUKBankClient) GetInternalAccounts(_ context.Context, subject string) 
 	}
 	defer response.Body.Close()
 
-	if bytes, err = ioutil.ReadAll(response.Body); err != nil {
+	if bytes, err = io.ReadAll(response.Body); err != nil {
 		return InternalAccounts{}, err
 	}
 

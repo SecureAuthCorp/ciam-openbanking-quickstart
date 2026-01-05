@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 
 	"github.com/caarlos0/env/v6"
 	"github.com/go-playground/validator/v10"
@@ -162,7 +162,7 @@ func LoadBanksConfig(config Config) (BanksConfig, error) {
 		}, nil
 	}
 
-	if bs, err = ioutil.ReadFile(config.BanksConfigFile); err != nil {
+	if bs, err = os.ReadFile(config.BanksConfigFile); err != nil {
 		return BanksConfig{}, errors.Wrapf(err, "failed to read banks config file: %s", config.BanksConfigFile)
 	}
 

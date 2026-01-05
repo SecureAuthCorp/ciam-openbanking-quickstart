@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -88,7 +87,7 @@ func TestLoadBanksConfig(t *testing.T) {
 			t.Parallel()
 
 			if tc.jsonContent != "" {
-				configFile, err := ioutil.TempFile("/tmp", "testbankconfig_*.json")
+				configFile, err := os.CreateTemp("/tmp", "testbankconfig_*.json")
 				require.NoError(t, err)
 				defer os.Remove(configFile.Name())
 

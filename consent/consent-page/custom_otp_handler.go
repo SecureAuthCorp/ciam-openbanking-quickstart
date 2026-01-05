@@ -6,8 +6,8 @@ import (
 	"crypto/x509"
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -27,7 +27,7 @@ func NewCustomOTPHandler(config Config, repo *OTPRepo) (OTPHandler, error) {
 		err  error
 	)
 
-	if bts, err = ioutil.ReadFile(config.RootCA); err != nil {
+	if bts, err = os.ReadFile(config.RootCA); err != nil {
 		logrus.Errorf("failed to read root ca from %s", config.RootCA)
 		return nil, err
 	}

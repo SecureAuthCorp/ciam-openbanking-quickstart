@@ -6,7 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -108,7 +108,7 @@ func (c *CDRBankClient) GetInternalAccounts(ctx context.Context, id string) (Int
 	}
 	defer response.Body.Close()
 
-	if body, err = ioutil.ReadAll(response.Body); err != nil {
+	if body, err = io.ReadAll(response.Body); err != nil {
 		return InternalAccounts{}, errors.Wrap(err, "internal bank accounts api call failed")
 	}
 

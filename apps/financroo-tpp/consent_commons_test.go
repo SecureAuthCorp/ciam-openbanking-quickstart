@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -150,7 +150,7 @@ func assertBody(t *testing.T, tc testCase, response *http.Response) {
 	)
 	t.Helper()
 
-	body, err = ioutil.ReadAll(response.Body)
+	body, err = io.ReadAll(response.Body)
 	assert.NoError(t, err)
 
 	if tc.expectedError != "" {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -244,7 +244,7 @@ func RenewAccountsToken(_ context.Context, bank ConnectedBank, client acpclient.
 	}
 	defer response.Body.Close()
 
-	if body, err = ioutil.ReadAll(response.Body); err != nil {
+	if body, err = io.ReadAll(response.Body); err != nil {
 		return nil, err
 	}
 
