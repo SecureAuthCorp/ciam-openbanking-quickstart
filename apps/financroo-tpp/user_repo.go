@@ -42,7 +42,7 @@ func (u *UserRepo) Get(sub string) (User, error) {
 		err  error
 	)
 
-	if err = u.DB.View(func(tx *bolt.Tx) error {
+	if err = u.View(func(tx *bolt.Tx) error {
 		k, bs = tx.Bucket(usersBucket).Cursor().Seek([]byte(sub))
 
 		if bs == nil || !bytes.Equal(k, []byte(sub)) {
@@ -73,7 +73,7 @@ func (u *UserRepo) Set(user User) error {
 		return errors.Wrapf(err, "failed to marshal user")
 	}
 
-	if err = u.DB.Update(func(tx *bolt.Tx) error {
+	if err = u.Update(func(tx *bolt.Tx) error {
 		return tx.Bucket(usersBucket).Put([]byte(user.Sub), bs)
 	}); err != nil {
 		return errors.Wrapf(err, "failed to update user")

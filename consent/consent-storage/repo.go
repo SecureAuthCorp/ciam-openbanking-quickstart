@@ -33,7 +33,7 @@ func (u *ConsentRepo) List() ([]Consent, error) {
 		err      error
 	)
 
-	if err = u.DB.View(func(tx *bolt.Tx) error {
+	if err = u.View(func(tx *bolt.Tx) error {
 		c := tx.Bucket(consentsBucket).Cursor()
 
 		for k, v := c.First(); k != nil; k, v = c.Next() {
@@ -80,7 +80,7 @@ func (u *ConsentRepo) Get(id ConsentID) (Consent, error) {
 		err     error
 	)
 
-	if err = u.DB.View(func(tx *bolt.Tx) error {
+	if err = u.View(func(tx *bolt.Tx) error {
 		bs = tx.Bucket(consentsBucket).Get([]byte(id))
 
 		if bs == nil {

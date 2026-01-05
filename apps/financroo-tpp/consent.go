@@ -387,7 +387,7 @@ func (o *OBBRConsentClient) CreatePaymentConsent(c *gin.Context, req CreatePayme
 		return "", errors.Wrapf(err, "failed to marshal payment consent request")
 	}
 
-	if jwt, err = o.Signer.Sign(bytes); err != nil {
+	if jwt, err = o.Sign(bytes); err != nil {
 		return "", errors.Wrapf(err, "failed to sign payment consent request")
 	}
 

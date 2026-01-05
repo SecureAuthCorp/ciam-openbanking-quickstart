@@ -39,7 +39,7 @@ func (c *OBBRBankClient) GetInternalAccounts(ctx context.Context, id string) (In
 		return InternalAccounts{}, err
 	}
 
-	if response, err = c.Client.Do(request); err != nil {
+	if response, err = c.Do(request); err != nil {
 		return InternalAccounts{}, err
 	}
 	defer response.Body.Close()
@@ -91,7 +91,7 @@ func (c *OBBRBankClient) GetInternalBalances(ctx context.Context, id string) (Ba
 		return BalanceResponse{}, err
 	}
 
-	if response, err = c.Client.Do(request); err != nil {
+	if response, err = c.Do(request); err != nil {
 		return BalanceResponse{}, err
 	}
 	defer response.Body.Close()
