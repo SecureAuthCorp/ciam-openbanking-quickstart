@@ -22,7 +22,8 @@ func TestConfig(t *testing.T) {
 		"BANK_URL":          "http://bank-br:8070",
 		"BANKS_CONFIG_FILE": "banks.json",
 	} {
-		os.Setenv(k, v)
+		err := os.Setenv(k, v)
+		require.NoError(t, err)
 	}
 
 	config, err := LoadConfig()
