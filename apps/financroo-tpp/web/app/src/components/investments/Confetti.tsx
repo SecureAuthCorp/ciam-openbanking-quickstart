@@ -10,13 +10,13 @@ const useStyles = makeStyles()(() => ({
 }));
 
 export default function Confetti() {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { classes } = useStyles();
 
   useEffect(() => {
-    if (canvasRef) {
+    if (canvasRef.current) {
       setTimeout(() => {
-        confetti.create(canvasRef.current)({
+        confetti.create(canvasRef.current ?? undefined)({
           spread: 360,
           origin: {
             y: 0.2,

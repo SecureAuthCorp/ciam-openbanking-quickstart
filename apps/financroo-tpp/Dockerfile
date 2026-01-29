@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.1.3-experimental
-FROM node:14 as js-builder
+FROM node:20-alpine as js-builder
 
 WORKDIR /app/web/app
 
@@ -9,6 +9,9 @@ COPY apps/financroo-tpp/web/app/package-lock.json package-lock.json
 RUN npm install --no-audit --prefer-offline
 
 COPY apps/financroo-tpp/web/app/tsconfig.json tsconfig.json
+COPY apps/financroo-tpp/web/app/tsconfig.node.json tsconfig.node.json
+COPY apps/financroo-tpp/web/app/vite.config.ts vite.config.ts
+COPY apps/financroo-tpp/web/app/index.html index.html
 COPY apps/financroo-tpp/web/app/public public
 COPY apps/financroo-tpp/web/app/src src
 
