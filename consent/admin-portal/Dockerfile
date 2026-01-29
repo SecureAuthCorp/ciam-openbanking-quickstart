@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.1.3-experimental
-FROM node:14.15.1 as js-builder
+FROM node:20-alpine as js-builder
 
 WORKDIR /app/web/app
 
@@ -8,6 +8,9 @@ COPY consent/admin-portal/web/app/package-lock.json package-lock.json
 RUN npm install --no-audit --prefer-offline
 
 COPY consent/admin-portal/web/app/tsconfig.json tsconfig.json
+COPY consent/admin-portal/web/app/tsconfig.node.json tsconfig.node.json
+COPY consent/admin-portal/web/app/vite.config.ts vite.config.ts
+COPY consent/admin-portal/web/app/index.html index.html
 COPY consent/admin-portal/web/app/public public
 COPY consent/admin-portal/web/app/src src
 RUN npm run build
