@@ -39,6 +39,7 @@ clients:
   token_endpoint_auth_method: none
   redirect_uris:
   - {{ .consent_self_service_portal_url }}/callback
+  - {{ .consent_self_service_portal_url }}/silent
   trusted: true
 - tenant_id: {{ .tenant_id }}
   authorization_server_id: {{ .bank_customers_server_id }}
