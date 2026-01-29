@@ -139,7 +139,12 @@ func (s *Server) Start() error {
 		log.Printf("endpoint %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
 	r.LoadHTMLGlob("web/app/build/index.html")
-	r.Static("/static", "./web/app/build/static")
+	r.Static("/assets", "./web/app/build/assets")
+	r.StaticFile("/favicon.ico", "./web/app/build/favicon.ico")
+	r.StaticFile("/logo192.png", "./web/app/build/logo192.png")
+	r.StaticFile("/logo512.png", "./web/app/build/logo512.png")
+	r.StaticFile("/manifest.json", "./web/app/build/manifest.json")
+	r.StaticFile("/robots.txt", "./web/app/build/robots.txt")
 
 	r.GET("/", s.Index())
 

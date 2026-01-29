@@ -1,56 +1,61 @@
 import { createTheme } from "@mui/material/styles";
 import { CSSProperties } from "react";
 
+interface CustomTheme {
+  heading2: {
+    fontWeight: string | number;
+    fontSize: number;
+    lineHeight: string;
+  };
+  heading3: {
+    fontWeight: string | number;
+    fontSize: number;
+    lineHeight: string;
+  };
+  heading6: {
+    fontWeight: string | number;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
+  label: {
+    fontWeight: string | number;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
+  caption: {
+    fontWeight: string | number;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
+  button: {
+    fontWeight: string | number;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+    textTransform: CSSProperties["textTransform"];
+  };
+  body1: {
+    fontSize: number;
+    lineHeight: string;
+  };
+  body2: {
+    fontSize: number;
+    lineHeight: string;
+  };
+}
+
 declare module "@mui/material/styles" {
   interface Theme {
-    custom: {
-      heading2: {
-        fontWeight: string | number;
-        fontSize: number;
-        lineHeight: string;
-      };
-      heading3: {
-        fontWeight: string | number;
-        fontSize: number;
-        lineHeight: string;
-      };
-      heading6: {
-        fontWeight: string | number;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-      label: {
-        fontWeight: string | number;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-      caption: {
-        fontWeight: string | number;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-      button: {
-        fontWeight: string | number;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-        textTransform: CSSProperties["textTransform"];
-      };
-      body1: {
-        fontSize: number;
-        lineHeight: string;
-      };
-      body2: {
-        fontSize: number;
-        lineHeight: string;
-      };
-    };
+    custom: CustomTheme;
   }
-  interface ThemeOptions extends Theme {}
+  interface ThemeOptions {
+    custom?: CustomTheme;
+  }
 }
+
 export const theme = createTheme({
   custom: {
     heading2: {
@@ -126,5 +131,4 @@ export const theme = createTheme({
       },
     },
   },
-  unstable_sx: {} as any,
 });

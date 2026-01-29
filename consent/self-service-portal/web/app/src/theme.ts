@@ -1,45 +1,49 @@
 import { createTheme, Theme } from "@mui/material/styles";
 
+interface CustomTheme {
+  heading2: {
+    fontWeight: React.CSSProperties["fontWeight"];
+    fontSize: React.CSSProperties["fontSize"];
+    lineHeight: React.CSSProperties["lineHeight"];
+  };
+  heading6: {
+    fontWeight: React.CSSProperties["fontWeight"];
+    fontSize: React.CSSProperties["fontSize"];
+    lineHeight: React.CSSProperties["lineHeight"];
+    color: React.CSSProperties["color"];
+  };
+  label: {
+    fontWeight: React.CSSProperties["fontWeight"];
+    fontSize: React.CSSProperties["fontSize"];
+    lineHeight: React.CSSProperties["lineHeight"];
+    color: React.CSSProperties["color"];
+  };
+  caption: {
+    fontWeight: React.CSSProperties["fontWeight"];
+    fontSize: React.CSSProperties["fontSize"];
+    lineHeight: React.CSSProperties["lineHeight"];
+    color: React.CSSProperties["color"];
+  };
+  button: {
+    fontWeight: React.CSSProperties["fontWeight"];
+    fontSize: React.CSSProperties["fontSize"];
+    lineHeight: React.CSSProperties["lineHeight"];
+    color: React.CSSProperties["color"];
+    textTransform: React.CSSProperties["textTransform"];
+  };
+  body2: {
+    fontSize: React.CSSProperties["fontSize"];
+    lineHeight: React.CSSProperties["lineHeight"];
+  };
+}
+
 declare module "@mui/material/styles" {
   interface Theme {
-    custom: {
-      heading2: {
-        fontWeight: React.CSSProperties["fontWeight"];
-        fontSize: React.CSSProperties["fontSize"];
-        lineHeight: React.CSSProperties["lineHeight"];
-      };
-      heading6: {
-        fontWeight: React.CSSProperties["fontWeight"];
-        fontSize: React.CSSProperties["fontSize"];
-        lineHeight: React.CSSProperties["lineHeight"];
-        color: React.CSSProperties["color"];
-      };
-      label: {
-        fontWeight: React.CSSProperties["fontWeight"];
-        fontSize: React.CSSProperties["fontSize"];
-        lineHeight: React.CSSProperties["lineHeight"];
-        color: React.CSSProperties["color"];
-      };
-      caption: {
-        fontWeight: React.CSSProperties["fontWeight"];
-        fontSize: React.CSSProperties["fontSize"];
-        lineHeight: React.CSSProperties["lineHeight"];
-        color: React.CSSProperties["color"];
-      };
-      button: {
-        fontWeight: React.CSSProperties["fontWeight"];
-        fontSize: React.CSSProperties["fontSize"];
-        lineHeight: React.CSSProperties["lineHeight"];
-        color: React.CSSProperties["color"];
-        textTransform: React.CSSProperties["textTransform"];
-      };
-      body2: {
-        fontSize: React.CSSProperties["fontSize"];
-        lineHeight: React.CSSProperties["lineHeight"];
-      };
-    };
+    custom: CustomTheme;
   }
-  interface ThemeOptions extends Theme {}
+  interface ThemeOptions {
+    custom?: CustomTheme;
+  }
 }
 
 export const theme: Theme = createTheme({
@@ -108,5 +112,4 @@ export const theme: Theme = createTheme({
       },
     },
   },
-  unstable_sx: {} as any,
 });

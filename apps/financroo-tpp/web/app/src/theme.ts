@@ -1,38 +1,42 @@
 import { createTheme } from "@mui/material/styles";
 
-declare module "@mui/material/styles" {
-  interface Theme {
-    custom: {
-      heading6: {
-        fontWeight: string;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-      label: {
-        fontWeight: string;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-      caption: {
-        fontWeight: string;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-      button: {
-        fontWeight: string;
-        fontSize: number;
-        lineHeight: string;
-        color: string;
-      };
-    };
-  }
-  interface ThemeOptions extends Theme {}
+interface CustomTheme {
+  heading6: {
+    fontWeight: string;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
+  label: {
+    fontWeight: string;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
+  caption: {
+    fontWeight: string;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
+  button: {
+    fontWeight: string;
+    fontSize: number;
+    lineHeight: string;
+    color: string;
+  };
 }
 
-const custom = {
+declare module "@mui/material/styles" {
+  interface Theme {
+    custom: CustomTheme;
+  }
+  interface ThemeOptions {
+    custom?: CustomTheme;
+  }
+}
+
+const custom: CustomTheme = {
   heading6: {
     fontWeight: "bold",
     fontSize: 12,
@@ -103,5 +107,4 @@ export const theme = createTheme({
       xl: 1920,
     },
   },
-  unstable_sx: {} as any,
 });

@@ -22,6 +22,7 @@ export class ConsentSelfServicePage {
 
   public clickOnApplicationCard(): void {
     cy.get(this.applicationCardLocator, { timeout: 30000 })
+      .first()
       .should("be.visible")
       .click();
   }

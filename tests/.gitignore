@@ -1,0 +1,12 @@
+# Dependencies
+node_modules
+
+# Cypress artifacts
+cypress/downloads
+cypress/screenshots
+cypress/videos
+
+# Yarn
+.yarn/cache
+.yarn/install-state.gz
+.pnp.*

@@ -20,9 +20,15 @@ import './commands'
 // require('./commands')
 
 const resizeObserverLoopErrRe = /ResizeObserver loop limit exceeded/
+const postMessageErrRe = /Cannot read properties of null \(reading 'postMessage'\)/
 
 Cypress.on('uncaught:exception', (err) => {
+  // Ignore ResizeObserver errors
   if (resizeObserverLoopErrRe.test(err.message)) {
+    return false
+  }
+  // Ignore postMessage errors from cross-origin navigation in Cypress
+  if (postMessageErrRe.test(err.message)) {
     return false
   }
 })
