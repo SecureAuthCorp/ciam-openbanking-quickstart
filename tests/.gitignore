@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+
+# Cypress artifacts
+cypress/downloads
+cypress/screenshots
+cypress/videos
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
