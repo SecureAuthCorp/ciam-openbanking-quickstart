@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.1.3-experimental
-FROM node:14.15.1 as js-builder
+FROM node:20-alpine as js-builder
 
 WORKDIR /app/web/app
 
@@ -9,6 +9,9 @@ COPY consent/self-service-portal/web/app/package-lock.json package-lock.json
 RUN npm install --no-audit --prefer-offline
 
 COPY consent/self-service-portal/web/app/tsconfig.json tsconfig.json
+COPY consent/self-service-portal/web/app/tsconfig.node.json tsconfig.node.json
+COPY consent/self-service-portal/web/app/vite.config.ts vite.config.ts
+COPY consent/self-service-portal/web/app/index.html index.html
 COPY consent/self-service-portal/web/app/public public
 COPY consent/self-service-portal/web/app/src src
 
