@@ -51,7 +51,6 @@ describe(`Consent self service app`, () => {
     acpLoginPage.assertThatModalIsDisplayed();
     acpLoginPage.login();
 
-    consentSelfServicePage.clickOnAccountOnlyButton();
     consentSelfServicePage.clickOnApplicationCard();
 
     consentSelfServiceApplicationPage.expandAccountsTab();
@@ -66,7 +65,6 @@ describe(`Consent self service app`, () => {
     acpLoginPage.assertThatModalIsDisplayed();
     acpLoginPage.login();
 
-    consentSelfServicePage.clickOnAccountOnlyButton();
     consentSelfServicePage.clickOnApplicationCard();
 
     consentSelfServiceApplicationPage.expandAccountsTab();
