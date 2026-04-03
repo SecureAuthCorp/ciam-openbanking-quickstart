@@ -10,7 +10,7 @@ require (
 	github.com/ggicci/httpin v0.10.1
 	github.com/ghodss/yaml v1.0.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/go-jose/go-jose/v4 v4.0.5
+	github.com/go-jose/go-jose/v4 v4.1.4
 	github.com/go-openapi/errors v0.20.4
 	github.com/go-openapi/runtime v0.26.0
 	github.com/go-openapi/strfmt v0.21.7
