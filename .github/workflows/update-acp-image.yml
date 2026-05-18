@@ -31,7 +31,6 @@ jobs:
           new_branch: bump-acp-image-${{ steps.date.outputs.date }}
 
       - name: Create PR
-        id: create_pr
         uses: devops-infra/action-pull-request@v0.5.3
         with:
           source_branch: bump-acp-image-${{ steps.date.outputs.date }}
@@ -41,14 +40,23 @@ jobs:
           draft: false
           allow_no_diff: false
 
+      - name: Find PR number
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          number=$(gh pr list --head bump-acp-image-${{ steps.date.outputs.date }} \
+                     --state open --json number --jq '.[0].number // ""')
+          echo "number=$number" >> "$GITHUB_OUTPUT"
+
       - name: Auto-approve PR
-        if: steps.create_pr.outputs.pr_number != ''
+        if: steps.pr.outputs.number != ''
         env:
           GH_TOKEN: ${{ secrets.GH_SERVICE_ACCOUNT_DEVOPS_2_PAT1 }}
-        run: gh pr review --approve ${{ steps.create_pr.outputs.pr_number }}
+        run: gh pr review --approve ${{ steps.pr.outputs.number }}
 
       - name: Enable auto-merge
-        if: steps.create_pr.outputs.pr_number != ''
+        if: steps.pr.outputs.number != ''
         env:
           GH_TOKEN: ${{ secrets.GH_SERVICE_ACCOUNT_DEVOPS_2_PAT1 }}
-        run: gh pr merge --auto --squash ${{ steps.create_pr.outputs.pr_number }}
+        run: gh pr merge --auto --squash ${{ steps.pr.outputs.number }}
