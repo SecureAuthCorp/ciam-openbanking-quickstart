@@ -31,6 +31,7 @@ jobs:
           new_branch: bump-acp-image-${{ steps.date.outputs.date }}
 
       - name: Create PR
+        id: create_pr
         uses: devops-infra/action-pull-request@v0.5.3
         with:
           source_branch: bump-acp-image-${{ steps.date.outputs.date }}
@@ -39,3 +40,15 @@ jobs:
           body: "**Automated pull request**"
           draft: false
           allow_no_diff: false
+
+      - name: Auto-approve PR
+        if: steps.create_pr.outputs.pr_number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_SERVICE_ACCOUNT_DEVOPS_2_PAT1 }}
+        run: gh pr review --approve ${{ steps.create_pr.outputs.pr_number }}
+
+      - name: Enable auto-merge
+        if: steps.create_pr.outputs.pr_number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_SERVICE_ACCOUNT_DEVOPS_2_PAT1 }}
+        run: gh pr merge --auto --squash ${{ steps.create_pr.outputs.pr_number }}
