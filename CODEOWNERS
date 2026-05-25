@@ -1,3 +1,5 @@
 /.env-local @ikawalec
 **/package*.json @ikawalec
+**/*.lock @ikawalec
 /go.* @ikawalec
+**/Dockerfile @ikawalec
