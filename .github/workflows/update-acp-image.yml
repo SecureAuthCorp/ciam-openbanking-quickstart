@@ -13,7 +13,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
         with:
           ref: master
           fetch-depth: 0
@@ -22,7 +22,7 @@ jobs:
         run: ./scripts/override_env.sh ACP_VERSION ${{ github.event.client_payload.acp-version }} 
 
       - name: Commit changes
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9
         with:
           author_name: Github automation
           author_email: mail@example.com
@@ -31,7 +31,7 @@ jobs:
           new_branch: bump-acp-image-${{ steps.date.outputs.date }}
 
       - name: Create PR
-        uses: devops-infra/action-pull-request@v0.5.3
+        uses: devops-infra/action-pull-request@d2b6e10c00db8cf882070717497bfcebe0414e18 # v0.5.3
         with:
           source_branch: bump-acp-image-${{ steps.date.outputs.date }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
