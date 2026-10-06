@@ -31,7 +31,7 @@ jobs:
           new_branch: bump-acp-image-${{ steps.date.outputs.date }}
 
       - name: Create PR
-        uses: devops-infra/action-pull-request@d2b6e10c00db8cf882070717497bfcebe0414e18 # v0.5.3
+        uses: devops-infra/action-pull-request@1d8aa3c4a6060a1410641f700f91353af65cc94b # v1.4.0
         with:
           source_branch: bump-acp-image-${{ steps.date.outputs.date }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
